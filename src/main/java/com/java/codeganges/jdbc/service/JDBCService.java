@@ -2,7 +2,7 @@ package com.java.codeganges.jdbc.service;
 
 import java.util.List;
 
-import com.java.codeganges.configuration.EmployeeVO;
+import com.java.codeganges.jdbc.vo.EmployeeVO;
 
 public interface JDBCService {
 	

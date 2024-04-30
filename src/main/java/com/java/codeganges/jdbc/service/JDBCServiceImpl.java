@@ -8,8 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.java.codeganges.configuration.EmployeeVO;
 import com.java.codeganges.jdbc.dao.JDBCDao;
+import com.java.codeganges.jdbc.vo.EmployeeVO;
 
 @Service
 public class JDBCServiceImpl implements JDBCService {
