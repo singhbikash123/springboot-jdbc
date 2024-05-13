@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class JDBCServiceImpl implements JDBCService {
 			if (null != map.get("DEPTNO")) {
 				employeeVO.setDepartmentNumber(((java.math.BigDecimal) map.get("DEPTNO")).intValue());
 			}
-			employeeVO.setHireDate(dateFomat( (String) map.get("HIREDATE")));
+			employeeVO.setHireDate(new SimpleDateFormat("MM-dd-yyyy").format(map.get("HIREDATE")));
 
 			employeeList.add(employeeVO);
 		}
@@ -52,12 +53,52 @@ public class JDBCServiceImpl implements JDBCService {
 		return employeeList;
 	}
 
-	private String dateFomat(String unformattedDate) {
+	public EmployeeVO getEmployee(int empID) {
+		return jdbcDao.getEmployee(empID);
 
-		String pattern = "MM/dd/yyyy";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		String date = simpleDateFormat.format(unformattedDate);
-		return date;
 	}
 
+
+	@Override
+	public int getEmployeeCount() {
+		return jdbcDao.getEmployeeCount();
+	}
+
+	public Map<String, Object> getEmployeeListForMap() {
+		return jdbcDao.getEmployeeListForMap();
+	}
+
+	public Stream<EmployeeVO> getAllEmployeeStream(){
+		return jdbcDao.getAllEmployeeStream();
+	}
+
+	@Override
+	public EmployeeVO getEmployeeQueryForObject(int empID) {
+		return jdbcDao.getEmployeeQueryForObject(empID);
+	}
+
+	@Override
+	public List<EmployeeVO> getEmployeeListUsingQuery() {
+		return jdbcDao.getEmployeeListUsingQuery();
+	}
+
+	@Override
+	public int addEmployee(EmployeeVO employee) {
+		return jdbcDao.addEmployee(employee);
+	}
+
+	@Override
+	public int updateEmployeeName(String name, int empID) {
+		return jdbcDao.updateEmployeeName(name, empID);
+	}
+
+	@Override
+	public int deleteEmployee(int empID) {
+		return jdbcDao.deleteEmployee(empID);
+	}
+
+	@Override
+	public int addUpdateEmployee(EmployeeVO employee) {
+		return jdbcDao.addUpdateEmployee(employee);
+	}
 }
